@@ -1,0 +1,24 @@
+{
+  "name": "CWModeration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "discord.js": "dev",
+    "mineflayer": "^3.7.0",
+    "util": "^0.12.3",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "path": "^0.12.7"
+  },
+  "engines": {
+    "node": "16.3.0"
+  }
+}
