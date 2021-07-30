@@ -5,7 +5,12 @@ const client = new Discord.Client({
 intents: [ "GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_BANS", "GUILD_EMOJIS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING" ]
 })
 // import config
-import { token } from "./config.json";
+import { token } from "./config.js";
+// check bot token
+if ( token = "BOT_TOKEN") {
+console.log("SET YOUR BOT TOKEN IN CONFIG.JS!!")
+process.exit(0)
+}
 
 // When it ready
 client.on("ready", () => {
