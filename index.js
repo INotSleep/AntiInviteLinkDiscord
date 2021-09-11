@@ -8,7 +8,7 @@ let hasImmune = false
 // import config
 import { token, immuneRoles } from "./config.js";
 // check bot token
-if ( token = "BOT_TOKEN") {
+if ( token == "BOT_TOKEN") {
   console.log("SET YOUR BOT TOKEN IN CONFIG.JS!!")
   process.exit(0)
 }
