@@ -4,3 +4,4 @@ const immuneRoles = []
 
 // export data
 export { token as token }
+export { immuneRoles as immuneRoles }
