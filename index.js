@@ -4,7 +4,6 @@ import Discord from "discord.js"
 const client = new Discord.Client({
   intents: [ "GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_BANS", "GUILD_EMOJIS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING" ]
 })
-let hasImmune = false
 // import config
 import { token, immuneRoles } from "./config.js";
 // check bot token
@@ -20,20 +19,10 @@ client.on("ready", () => {
 
 //Invite block
 client.on("messageCreate", function() {
-if (this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite")) {
-  immuneRoles.forEach(role => {
-    
-  if (this.member.roles.has(role)) {
-    hasImmune = true
-    break
-} else hasImmune = false
-})
-  
-  if (!hasImmune) {
-    this.channel.send(`<@${this.author.id}>, invite links is not allowed!`).then(m => m.delete({ timeout: 15000 }))
-    //                                       Here ^^^^ change your message. <@${this.author.id}> - ping user
-    this.delete()
-  }
+if (this.member.roles.has(immuneRoles) && this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite")) {
+  this.channel.send(`<@${this.author.id}>, invite links is not allowed!`).then(m => m.delete({ timeout: 15000 }))
+  //                                       Here ^^^^ change your message. <@${this.author.id}> - ping user
+  this.delete()
 }
 })
 
