@@ -20,7 +20,8 @@ A simple sourse code of Anti invite link bot
 
 ## Configuration
 
-Open config.js and change `BOT_TOKEN` to your Bot token. 
-You can change delete message in index.js.
+* Open config.js and change `BOT_TOKEN` to your Bot token. 
+* Also in config.js in `immuneRoles` add id of roles, that was have immune for this like `[ "id1", "id2", ... "idn"  ]`. 
+* You can change delete message in index.js.
 
 #
