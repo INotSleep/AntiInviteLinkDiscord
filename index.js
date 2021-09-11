@@ -20,7 +20,8 @@ console.log(`Logined as ${client.user.tag}`)
 //Invite block
 client.on("messageCreate", function() {
 if (!this.guild.members.cache.get(this.author.id).bannable && this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite")) {
-this.channel.send(`<@${this.author.id}>, приглашения отправлять нельзя!!`).then(m => m.delete({ timeout: 15000 }))
+this.channel.send(`<@${this.author.id}>, invite links is not allowed!`).then(m => m.delete({ timeout: 15000 }))
+//                                       Here ^^^^ change your message. <@${this.author.id}> - ping user
 this.delete()
 }
 })
