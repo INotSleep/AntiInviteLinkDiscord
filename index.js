@@ -19,7 +19,7 @@ client.on("ready", () => {
 
 //Invite block
 client.on("messageCreate", function() {
-if (this.member.roles.has(immuneRoles) && this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite")) {
+if (!this.member.roles.has(immuneRoles) && (this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite"))) {
   this.channel.send(`<@${this.author.id}>, invite links is not allowed!`).then(m => m.delete({ timeout: 15000 }))
   //                                       Here ^^^^ change your message. <@${this.author.id}> - ping user
   this.delete()
