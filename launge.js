@@ -14,6 +14,7 @@ messages.logging.embed.footer.text = `AntiInviteLinkDiscord`
 messages.logging.embed.footer.imageEnabled = true
 messages.logging.embed.footer.image = `{botAvatar}`
 messages.logging.embed.timestamp = true
+messages.logging.embed.color = `#ffffff`
 
 messages.logging.noEmbed = `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`
 
