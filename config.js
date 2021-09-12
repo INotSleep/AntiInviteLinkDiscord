@@ -1,7 +1,8 @@
 // setup data 
-const token = "BOT_TOKEN"
-const immuneRoles = []
+let config = {}
+
+const config.token = "BOT_TOKEN"
+const config.immuneRoles = []
 
 // export data
-export { token as token }
-export { immuneRoles as immuneRoles }
+export { config }
