@@ -1,3 +1,4 @@
+use strict
 // import discord DONT TOUCH THIS
 import Discord from "discord.js"
 // setup intents DONT TOUCH THIS
@@ -22,8 +23,7 @@ client.on("ready", () => {
 //Invite block
 client.on("messageCreate", function() {
 if (!this.member.roles.cache.has(config.immuneRoles) && (this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite"))) {
-  this.channel.send(`<@${this.author.id}>, invite links is not allowed!`).then(m => m.delete({ timeout: 15000 }))
-  //                                       Here ^^^^ change your message. <@${this.author.id}> - ping user
+  this.channel.send(messages.deleteAlert.replaceAll(`{user}`, `<@${this.user.id}>`).replaceAll(`{channel}`, `<#${this.channel.id}>`).replaceAll(`{guild}`, `${this.guild.name}`)).then(m => m.delete({ timeout: 15000 }))
   this.delete()
 }
 })
