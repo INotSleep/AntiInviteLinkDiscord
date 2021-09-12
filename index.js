@@ -13,6 +13,10 @@ import { config } from "./config.js";
 // import launge file
 import { messages } from "./launge.js"
 
+function placeholderReplace(text) {
+  return text.replaceAll(`{user}`, `<@${this.author.id}>`).replaceAll(`{channel}`, `<#${this.channel.id}>`).replaceAll(`{guild}`, `${this.guild.name}`).replaceAll(`{botAvatar}`, client.user.displayAvatarURL())
+}
+
 // check configuration
 if (config.token == "BOT_TOKEN") {
   console.log("SET YOUR BOT TOKEN IN CONFIG.JS!!")
@@ -36,13 +40,44 @@ client.on("ready", () => {
 //Invite block
 client.on("messageCreate", function() {
   if (!this.member.roles.cache.has(config.immuneRoles) && (this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite"))) {
-    this.channel.send(messages.deleteAlert.replaceAll(`{user}`, `<@${this.user.id}>`).replaceAll(`{channel}`, `<#${this.channel.id}>`).replaceAll(`{guild}`, `${this.guild.name}`)).then(m => m.delete({ timeout: 15000 }))
+    this.channel.send(placeholderReplace(messages.deleteAlert)).then(m => m.delete({ timeout: 15000 }))
     this.delete()
     if (config.loggingEnabled) {
       if (config.loggingIsEnabled) {
-        logChannel.send({ embeds: [ new Discord.MessageEmbed() ] })
+        
+        var logEmbedOptions = {
+          title: placeholderReplace(),
+          description: placeholderReplace(),
+          fields: [
+            {
+              name: placeholderReplace(messages.logging.embed.field1.name),
+              value: placeholderReplace(messages.logging.embed.field3.value)
+            },
+            {
+              name: placeholderReplace(messages.logging.embed.field2.name),
+              value: placeholderReplace(messages.logging.embed.field2.value) 
+            },
+            {
+              name: placeholderReplace(messages.logging.embed.field3.name),
+              value: placeholderReplace(messages.logging.embed.field2.value) 
+            }
+          ],
+          color: messages.logging.embed.color
+          footer:
+          {
+            text: placeholderReplace(messages.logging.embed.footer.text)
+          }
+        }
+        if (messages.logging.embed.timestamp = true) {
+          logEmbedOptions.timestamp = ``
+        }
+        if (messages.logging.embed.footer.imageEnabled) {
+          logEmbedOptions.footer.iconURL = placeholderReplace(messages.logging.embed.footer.image)
+        }
+        var logEmbed = new Discord.MessageEmbed(logEmbedOptions)
+        logChannel.send({ embeds: [ logEmbed ] })
       } else {
-        logChannel.send()
+        logChannel.send(placeholderReplace(messages.logging.noEmbed))
       }
     }
   }
