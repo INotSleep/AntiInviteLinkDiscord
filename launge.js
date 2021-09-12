@@ -12,7 +12,7 @@ messages.logging.embed.field3.name = `Content:`
 messages.logging.embed.field3.value = `{content}`
 messages.logging.embed.footer.text = `AntiInviteLinkDiscord`
 messages.logging.embed.footer.imageEnabled = true
-messages.logging.embed.footer.image = `{botImage}`
+messages.logging.embed.footer.image = `{botAvatar}`
 messages.logging.embed.timestamp = true
 
 messages.logging.noEmbed = `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`
