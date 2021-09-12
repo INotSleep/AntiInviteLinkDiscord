@@ -1,6 +1,7 @@
 // setup data
-let messages = {}
+const messages = {}
 
-let messages.deleteAlert = `{user}, invite links are not allowed!`
+messages.deleteAlert = `{user}, invite links are not allowed!`
+
 // export data
 export { messages as messages}
