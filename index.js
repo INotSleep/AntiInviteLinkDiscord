@@ -14,7 +14,12 @@ import { config } from "./config.js";
 import { messages } from "./launge.js"
 
 function placeholderReplace(text) {
-  return text.replaceAll(`{user}`, `<@${this.author.id}>`).replaceAll(`{channel}`, `<#${this.channel.id}>`).replaceAll(`{guild}`, `${this.guild.name}`).replaceAll(`{botAvatar}`, client.user.displayAvatarURL())
+  return text.replaceAll(`{user}`, `<@${this.author.id}>`)
+             .replaceAll(`{channel}`, `<#${this.channel.id}>`)
+             .replaceAll(`{guild}`, `${this.guild.name}`)
+             .replaceAll(`{botAvatar}`, client.user.displayAvatarURL())
+             .replaceAll(`{guildIcon}`, this.guild.iconURL())
+             .replaceAll(`{userAvatar}`, this.author.displayAvatarURL())
 }
 
 // check configuration
@@ -46,22 +51,8 @@ client.on("messageCreate", function() {
       if (config.loggingIsEnabled) {
         
         var logEmbedOptions = {
-          title: placeholderReplace(),
-          description: placeholderReplace(),
-          fields: [
-            {
-              name: placeholderReplace(messages.logging.embed.field1.name),
-              value: placeholderReplace(messages.logging.embed.field3.value)
-            },
-            {
-              name: placeholderReplace(messages.logging.embed.field2.name),
-              value: placeholderReplace(messages.logging.embed.field2.value) 
-            },
-            {
-              name: placeholderReplace(messages.logging.embed.field3.name),
-              value: placeholderReplace(messages.logging.embed.field2.value) 
-            }
-          ],
+          title: placeholderReplace(message.logging.embed.title),
+          description: placeholderReplace(message.logging.embed.description),
           color: messages.logging.embed.color,
           footer: {
             text: placeholderReplace(messages.logging.embed.footer.text)
