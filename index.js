@@ -62,7 +62,7 @@ client.on("messageCreate", function() {
               value: placeholderReplace(messages.logging.embed.field2.value) 
             }
           ],
-          color: messages.logging.embed.color
+          color: messages.logging.embed.color,
           footer: {
             text: placeholderReplace(messages.logging.embed.footer.text)
           }
