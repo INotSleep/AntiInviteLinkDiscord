@@ -1,6 +1,6 @@
 // setup data
 const messages = {
-  deleteAlert = `{user}, invite links are not allowed!`,
+  deleteAlert: `{user}, invite links are not allowed!`,
   logging: {
     embed: {
       title:  `Invite link was posted`,
