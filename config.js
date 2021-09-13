@@ -1,14 +1,14 @@
 // setup data 
-const config = {}
-
-config.token = "BOT_TOKEN"
-
-config.immuneRoles = []
-
-config.logging.ChannelID = "CHANNEL_ID"
-config.logging.GuildID = "GUILD_ID"
-config.logging.isEnabled = false
-config.logging.isEmbed = true
+const config = {
+  token: "BOT_TOKEN",
+  immuneRoles: []
+  logging: {
+    ChannelID: "CHANNEL_ID",
+    GuildID: "GUILD_ID",
+    isEnabled: false,
+    isEmbed: true
+  }
+}
 
 // export data
 export { config }
