@@ -1,4 +1,4 @@
-use strict
+"use strict";
 // import discord DONT TOUCH THIS
 import Discord from "discord.js"
 
