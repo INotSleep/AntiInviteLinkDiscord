@@ -1,4 +1,4 @@
-# AntiInviteLinkDiscord
+# AntiInviteLinkDiscord v1.0
 
 A simple sourse code of Anti invite link bot
 
@@ -10,5 +10,3 @@ Choose your launge:
 [Русский](launge_rm/ru.md)
 
 #
-
-Developing v1.0...
