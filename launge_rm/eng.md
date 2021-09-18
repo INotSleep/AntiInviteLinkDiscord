@@ -22,6 +22,24 @@ A simple sourse code of Anti invite link bot
 
 * Open config.js and change `BOT_TOKEN` to your Bot token. 
 * Also in config.js in `immuneRoles` add id of roles, that was have immune for this like `[ "id1", "id2", ... "idn"  ]`. 
-* You can change delete message in index.js.
+* You can enable logging in `logging.isEnabled`.
+* You can make log message embed or simple text. (`logging.isEmbed`)
+* If logging enabled, put in `ChannelId` id of log channel
+
+## Messages
+
+* You can change **ALL** messages of this bot.
+* Delete alert message: you can change it in launge.js (`deleteAlert`)
+* You can change **ALL** messages in embed (launge.js: `logging.embed`)
+* If you dont want to use embed - change log message when no embed in launge.js: `logging.noEmbed` 
+
+## Placeholders
+
+* `{user}` will be replaced to user mention
+* `{channel}` will be replaced to channel mention
+* `{guild}` will be replaced to guild name
+* `{botAvatar}` will be replaced to bot avatar link (it used in footer image)
+* `{guildIcon}` will be replaced to guild icon link
+* `{userAvatar}` will be replaced to user avatar link (user who trigered message event)
 
 #
