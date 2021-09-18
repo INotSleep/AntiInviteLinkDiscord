@@ -10,3 +10,5 @@ Choose your launge:
 [Русский](launge_rm/ru.md)
 
 #
+
+v1.0 Realised!
