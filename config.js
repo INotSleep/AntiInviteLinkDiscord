@@ -4,7 +4,6 @@ const config = {
   immuneRoles: [],
   logging: {
     ChannelID: "CHANNEL_ID",
-    GuildID: "GUILD_ID",
     isEnabled: false,
     isEmbed: true
   }
