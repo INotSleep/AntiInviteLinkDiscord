@@ -10,49 +10,52 @@ const client = new Discord.Client({
 // import config
 import { config } from "./config.js";
 
+// login bot
+client.login(config.token)
+
 // import launge file
 import { messages } from "./launge.js"
-
-function placeholderReplace(text) {
-  return text.replaceAll(`{user}`, `<@${this.author.id}>`)
-             .replaceAll(`{channel}`, `<#${this.channel.id}>`)
-             .replaceAll(`{guild}`, `${this.guild.name}`)
-             .replaceAll(`{botAvatar}`, client.user.displayAvatarURL())
-             .replaceAll(`{guildIcon}`, this.guild.iconURL())
-             .replaceAll(`{userAvatar}`, this.author.displayAvatarURL())
-}
 
 // check configuration
 if (config.token == "BOT_TOKEN") {
   console.log("SET YOUR BOT TOKEN IN CONFIG.JS!!")
   process.exit(0)
 }
-
-if (config.logginEnabled) {
-  if ( config.logChannelID == "CHANNEL_ID" || config.logGuildID == "GUILD_ID") {
-    console.log("SETUP LOGCHANNELID AND LOGGUILDID IN CONFIG.JS!!")
-    process.exit(0)
-  } else {
-    let logChannel = client.guilds.cache.get(config.logGuildID).channels.cache.get(config.logChannelID)
-  }
-}
+let logChannel = {}
 
 // When it ready
-client.on("ready", () => {
+client.on("ready", async() => {
   console.log(`Logined as ${client.user.tag}`)
+  if (config.logging.isEnabled) {
+  if ( config.logging.ChannelID == "CHANNEL_ID") {
+    console.log("SETUP LOGGING.CHANNELID IN CONFIG.JS!!")
+    process.exit(0)
+  } else {
+    logChannel = await client.channels.fetch(`${config.logging.ChannelID}`)
+   }
+}
 })
 
 //Invite block
-client.on("messageCreate", function() {
-  if (!this.member.roles.cache.has(config.immuneRoles) && (this.content.includes("discord.gg/") || this.content.includes("discordapp.com/invite") || this.content.includes("discord.com/invite"))) {
-    this.channel.send(placeholderReplace(messages.deleteAlert)).then(m => m.delete({ timeout: 15000 }))
-    this.delete()
-    if (config.loggingEnabled) {
-      if (config.loggingIsEnabled) {
+client.on("messageCreate", message => {
+  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && (message.content.includes("discord.gg/") || message.content.includes("discordapp.com/invite") || message.content.includes("discord.com/invite"))) {
+    function placeholderReplace(text) {
+    return text.replaceAll(`{user}`, `<@${message.author.id}>`)
+               .replaceAll(`{channel}`, `<#${message.channel.id}>`)
+               .replaceAll(`{guild}`, `${message.guild.name}`)
+               .replaceAll(`{botAvatar}`, `${client.user.displayAvatarURL()}`)
+               .replaceAll(`{guildIcon}`, `${message.guild.iconURL()}`)
+               .replaceAll(`{userAvatar}`, `${message.author.displayAvatarURL()}`)
+               .replaceAll(`{content}`, `${message.content}`)
+  }
+    message.channel.send(placeholderReplace(messages.deleteAlert)).then(m => setTimeout(function () { m.delete() }, 15000))
+    message.delete()
+    if (config.logging.isEnabled) {
+      if (config.logging.isEmbed) {
         
         var logEmbedOptions = {
-          title: placeholderReplace(message.logging.embed.title),
-          description: placeholderReplace(message.logging.embed.description),
+          title: placeholderReplace(messages.logging.embed.title),
+          description: placeholderReplace(messages.logging.embed.description),
           color: messages.logging.embed.color,
           footer: {
             text: placeholderReplace(messages.logging.embed.footer.text)
@@ -72,5 +75,3 @@ client.on("messageCreate", function() {
     }
   }
 })
-
-client.login(config.token)
