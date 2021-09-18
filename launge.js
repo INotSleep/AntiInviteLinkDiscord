@@ -4,7 +4,7 @@ const messages = {
   logging: {
     embed: {
       title:  `Invite link was posted`,
-      description: `User:\n{user}\nChannel:\n{channel}\nContent:{content}`,
+      description: `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`,
       footer: {
         text: `AntiInviteLinkDiscord`,
         imageEnabled: true,
