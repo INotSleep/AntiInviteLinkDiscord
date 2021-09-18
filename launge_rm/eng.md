@@ -29,8 +29,8 @@ A simple sourse code of Anti invite link bot
 ## Messages
 
 * You can change **ALL** messages of this bot.
-* Delete alert message: you can change it in launge.js (`deleteAlert`)
-* You can change **ALL** messages in embed (launge.js: `logging.embed`)
+* Delete alert message: you can change it in launge.js: `deleteAlert`
+* You can change **ALL** messages in embed in launge.js: `logging.embed`
 * If you dont want to use embed - change log message when no embed in launge.js: `logging.noEmbed` 
 
 ## Placeholders
