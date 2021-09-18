@@ -41,5 +41,6 @@ A simple sourse code of Anti invite link bot
 * `{botAvatar}` will be replaced to bot avatar link (it used in footer image)
 * `{guildIcon}` will be replaced to guild icon link
 * `{userAvatar}` will be replaced to user avatar link (user who trigered message event)
+* `{content}` will be replaced to message content
 
 #
