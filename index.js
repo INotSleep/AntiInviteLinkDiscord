@@ -38,7 +38,7 @@ client.on("ready", async() => {
 
 //Invite block
 client.on("messageCreate", message => {
-  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && message.content.match(/([Dd][Ii][Ss][Cc][Oo][Rr][Dd]\.([Gg][Gg]|[Cc][Oo][Mm])|[Dd][Ii][Ss][Cc][Oo][Rr][Dd][Aa][Pp][Pp]\.[Cc][Oo][Mm])\/([Ii][Nn][Vv][Ii][Tt][Ee]\/|)\w/) {
+  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && message.content.match(/([Dd][Ii][Ss][Cc][Oo][Rr][Dd]\.([Gg][Gg]|[Cc][Oo][Mm])|[Dd][Ii][Ss][Cc][Oo][Rr][Dd][Aa][Pp][Pp]\.[Cc][Oo][Mm])\/([Ii][Nn][Vv][Ii][Tt][Ee]\/|)\w/gm)) {
     function placeholderReplace(text) {
     return text.replaceAll(`{user}`, `<@${message.author.id}>`)
                .replaceAll(`{channel}`, `<#${message.channel.id}>`)
