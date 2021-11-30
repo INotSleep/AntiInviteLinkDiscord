@@ -1,6 +1,6 @@
 # AntiInviteLinkDiscord
 
-A simple sourse code of Anti invite link bot
+Source code of AntiInviteLink discord bot.
 
 ## Installation
 ### Heroku
@@ -15,16 +15,16 @@ A simple sourse code of Anti invite link bot
 
 1. Download source code
 2. Install Node.js v16.3.0
-3. Run command `npm i discord.js@13.1.0`
-4. Done!
+3. Run command `npm install`, it will install all required packages.
+4. Done! You can run the bot with command `node index.js` in bot directory.
 
 ## Configuration
 
 * Open config.js and change `BOT_TOKEN` to your Bot token. 
-* Also in config.js in `immuneRoles` add id of roles, that was have immune for this like `[ "id1", "id2", ... "idn"  ]`. 
+* Also in config.js in `immuneRoles` add id of roles, that can send invite links, like `[ "id1", "id2", ... "idn"  ]`. 
 * You can enable logging in `logging.isEnabled`.
 * You can make log message embed or simple text. (`logging.isEmbed`)
-* If logging enabled, put in `ChannelId` id of log channel
+* If logging enabled, put in `ChannelId` id of channel to log in.
 
 ## Messages
 
