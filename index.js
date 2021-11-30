@@ -37,7 +37,7 @@ client.on("ready", async() => {
 })
 function isBan(words, text) {
   const chk = text.toLowerCase()
-  for (const word in words) {
+  for (const word of words) {
     if (chk.includes(word)) {
       return true
       break
@@ -48,11 +48,8 @@ function isBan(words, text) {
   return false
 }
 //Invite block
-client.on("messageCreate", message => {
-  const content = message.content.toLowerCase()
-  const banwords = ['discord.gg/', 'discord.com/invite', 'discordapp.com/invite']
-  
-  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(banwords, content)) {
+client.on("messageCreate", message => { 
+  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, message.content)) {
     function placeholderReplace(text) {
     return text.replaceAll(`{user}`, `<@${message.author.id}>`)
                .replaceAll(`{channel}`, `<#${message.channel.id}>`)
