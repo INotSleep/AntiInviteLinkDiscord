@@ -11,4 +11,4 @@ Choose your launge:
 
 #
 
-v1.0 Realised!
+v1.0 Realeased!
