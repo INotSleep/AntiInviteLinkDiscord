@@ -25,7 +25,7 @@ let logChannel = {}
 
 // When it ready
 client.on("ready", async() => {
-  console.log(`Logined as ${client.user.tag}`)
+  console.log(`Logged in as ${client.user.tag}`)
   if (config.logging.isEnabled) {
   if ( config.logging.ChannelID == "CHANNEL_ID") {
     console.log("SETUP LOGGING.CHANNELID IN CONFIG.JS!!")
@@ -35,10 +35,24 @@ client.on("ready", async() => {
    }
 }
 })
-
+function isBan(words, text) {
+  const chk = text.toLowerCase()
+  for (const word in words) {
+    if (chk.includes(word)) {
+      return true
+      break
+    } else {
+     continue 
+    }
+  }
+  return false
+}
 //Invite block
 client.on("messageCreate", message => {
-  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && (message.content.toLowerCase().includes("discord.gg/") || message.content.toLowerCase().includes("discordapp.com/invite") || message.content.toLowerCase().includes("discord.com/invite"))) {
+  const content = message.content.toLowerCase()
+  const banwords = ['discord.gg/', 'discord.com/invite', 'discordapp.com/invite']
+  
+  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(banwords, content)) {
     function placeholderReplace(text) {
     return text.replaceAll(`{user}`, `<@${message.author.id}>`)
                .replaceAll(`{channel}`, `<#${message.channel.id}>`)
