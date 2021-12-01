@@ -1,9 +1,9 @@
 "use strict";
 // import discord DONT TOUCH THIS
-import Discord from "discord.js"
+import { Client, MessageEmbed } from "discord.js"
 
 // setup intents DONT TOUCH THIS
-const client = new Discord.Client({
+const client = new Client({
   intents: [ "GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES", "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING" ]
 })
 
@@ -78,11 +78,50 @@ client.on("messageCreate", message => {
         if (messages.logging.embed.footer.imageEnabled) {
           logEmbedOptions.footer.iconURL = placeholderReplace(messages.logging.embed.footer.image)
         }
-        var logEmbed = new Discord.MessageEmbed(logEmbedOptions)
+        var logEmbed = new MessageEmbed(logEmbedOptions)
         logChannel.send({ embeds: [ logEmbed ] })
       } else {
         logChannel.send(placeholderReplace(messages.logging.noEmbed))
       }
     }
+  }
+})
+
+client.on("messageUpdate", (oldMessage, newMessage) => {
+  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, newMessage.content)) {
+    function placeholderReplace(text) {
+    return text.replaceAll(`{user}`, `<@${newMessage.author.id}>`)
+               .replaceAll(`{channel}`, `<#${newMessage.channel.id}>`)
+               .replaceAll(`{guild}`, `${newMessage.guild.name}`)
+               .replaceAll(`{botAvatar}`, `${client.user.displayAvatarURL()}`)
+               .replaceAll(`{guildIcon}`, `${newMessage.guild.iconURL()}`)
+               .replaceAll(`{userAvatar}`, `${newMessage.author.displayAvatarURL()}`)
+               .replaceAll(`{content}`, `${newMessage.content}`)
+  }
+    if (config.logging.isEnabled) {
+      if (config.logging.isEmbed) {
+        
+        var logEmbedOptions = {
+          title: placeholderReplace(messages.logging.embed.title),
+          description: placeholderReplace(messages.logging.embed.description),
+          color: messages.logging.embed.color,
+          footer: {
+            text: placeholderReplace(messages.logging.embed.footer.text)
+          }
+        }
+        if (messages.logging.embed.timestamp = true) {
+          logEmbedOptions.timestamp = ``
+        }
+        if (messages.logging.embed.footer.imageEnabled) {
+          logEmbedOptions.footer.iconURL = placeholderReplace(messages.logging.embed.footer.image)
+        }
+        var logEmbed = new MessageEmbed(logEmbedOptions)
+        logChannel.send({ embeds: [ logEmbed ] })
+      } else {
+        logChannel.send(placeholderReplace(messages.logging.noEmbed))
+      }
+    }
+  }
+    newMessage.delete()
   }
 })
