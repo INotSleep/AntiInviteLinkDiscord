@@ -37,7 +37,8 @@ client.on("ready", async() => {
 })
 
 //Functions
-function isBan(words, text) {
+function isBan(words, text, channel) {
+  if (config.ignoringChannels.includes(channel.id)) return false
   const chk = text.toLowerCase()
   for (const word of words) {
     if (chk.includes(word)) {
@@ -72,7 +73,7 @@ Object.prototype.replaceAll = function(find, replace) {
 
 //Invite block
 client.on("messageCreate", message => { 
-  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, message.content)) {
+  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, message.content, message.channel)) {
     function placeholderReplace(text) {
     return text.replaceAll(`{user}`, `<@${message.author.id}>`)
                .replaceAll(`{channel}`, `<#${message.channel.id}>`)
@@ -85,7 +86,8 @@ client.on("messageCreate", message => {
     message.channel.send(placeholderReplace(messages.deleteAlert)).then(m => setTimeout(function () { m.delete() }, 15000))
     if (config.logging.isEnabled) {
       if (config.logging.isEmbed) {
-         var embed = placeholderReplace(messages.embeds.messageSendEmbed)
+	  var embed = new MessageEmbed(placeholderReplace(messages.logging.embeds.messageSendEmbed)).setTimestamp()
+	  logChannel.send({embeds: [embed]})
       } else {
         logChannel.send(placeholderReplace(messages.logging.noEmbed))
       }
@@ -95,7 +97,7 @@ client.on("messageCreate", message => {
 })
 
 client.on("messageUpdate", (oldMessage, newMessage) => {
-  if (!newMessage.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, newMessage.content)) {
+  if (!newMessage.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, newMessage.content, newMessage.channel)) {
     function placeholderReplace(text) {
     return text.replaceAll(`{user}`, `<@${newMessage.author.id}>`)
                .replaceAll(`{channel}`, `<#${newMessage.channel.id}>`)
@@ -107,13 +109,12 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
   }
     if (config.logging.isEnabled) {
       if (config.logging.isEmbed) {
-	  var embed = placeholderReplace(messages.embeds.messageEditEmbed)
+	  var embed = new MessageEmbed(placeholderReplace(messages.logging.embeds.messageEditEmbed)).setTimestamp()
 	  logChannel.send({embeds: [embed]})
       } else {
         logChannel.send(placeholderReplace(messages.logging.noEmbed))
       }
     }
 	newMessage.delete()
-  }
   }
 })
