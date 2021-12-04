@@ -21,7 +21,8 @@ Source code of AntiInviteLink discord bot.
 ## Configuration
 
 * Open config.js and change `BOT_TOKEN` to your Bot token. 
-* Also in config.js in `immuneRoles` add id of roles, that can send invite links, like `[ "id1", "id2", ... "idn"  ]`. 
+* In config.js in `immuneRoles` add id of roles, that can send invite links, like `[ "id1", "id2", ... "idn"  ]`. 
+* In `ignoringChannels` add id of channel to which you can send invite links, like `[ "id1", "id2", ... "idn"  ]`.
 * You can enable logging in `logging.isEnabled`.
 * You can make log message embed or simple text. (`logging.isEmbed`)
 * If logging enabled, put in `ChannelId` id of channel to log in.
@@ -30,7 +31,7 @@ Source code of AntiInviteLink discord bot.
 
 * You can change **ALL** messages of this bot.
 * Delete alert message: you can change it in launge.js: `deleteAlert`
-* You can change **ALL** messages in embed in launge.js: `logging.embed`
+* You can change **ALL** messages in embed in launge.js: `logging.embeds`
 * If you dont want to use embed - change log message when no embed in launge.js: `logging.noEmbed` 
 
 ## Placeholders
