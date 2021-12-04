@@ -2,16 +2,25 @@
 const messages = {
   deleteAlert: `{user}, invite links are not allowed!`,
   logging: {
-    embed: {
-      title:  `Invite link was posted`,
-      description: `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`,
-      footer: {
-        text: `AntiInviteLinkDiscord`,
-        imageEnabled: true,
-        image: `{botAvatar}`
+    embeds: {
+      messageSendEmbed: {
+		title: `Invite link was posted`,
+		description: `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`,
+		footer: {
+		  text: `AntiInviteLinkDiscord`,
+		  iconURL: `{botAvatar}`
+		},
+		timestamp: `{timeNow}`
       },
-      timestamp: true,
-      color: `#ffffff`
+	  messageEditEmbed: {
+		title: `Invite link was posted in edited message`,
+		description: `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`,
+		footer: {
+		  text: `AntiInviteLinkDiscord`,
+		  iconURL: `{botAvatar}`
+		},
+		timestamp: `{timeNow}`
+      }
     },
     noEmbed: `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`
   }
