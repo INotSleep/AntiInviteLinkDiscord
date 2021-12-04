@@ -1,4 +1,4 @@
-# AntiInviteLinkDiscord v1.0
+# AntiInviteLinkDiscord v1.1.0
 
 A simple sourse code of Anti invite link bot
 
@@ -11,4 +11,4 @@ Choose your language: | Выберите ваш язык:
 
 #
 
-v1.0 Released!
+v1.1.0 Released!
