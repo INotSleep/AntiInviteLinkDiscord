@@ -10,7 +10,7 @@ const messages = {
 		  text: `AntiInviteLinkDiscord`,
 		  iconURL: `{botAvatar}`
 		},
-		timestamp: `{timeNow}`
+		color: "#ffffff"
       },
 	  messageEditEmbed: {
 		title: `Invite link was posted in edited message`,
@@ -19,7 +19,7 @@ const messages = {
 		  text: `AntiInviteLinkDiscord`,
 		  iconURL: `{botAvatar}`
 		},
-		timestamp: `{timeNow}`
+		color: "#ffffff"
       }
     },
     noEmbed: `User:\n{user}\nChannel:\n{channel}\nContent:\n{content}`
