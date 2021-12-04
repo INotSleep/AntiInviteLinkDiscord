@@ -1,6 +1,7 @@
 // setup data 
 const config = {
   token: "BOT_TOKEN",
+  ignoringChannels: [],
   banwords: [
     'discord.gg/',
     'discord.com/invite',
