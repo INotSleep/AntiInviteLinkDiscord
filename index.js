@@ -35,6 +35,8 @@ client.on("ready", async() => {
    }
 }
 })
+
+//Functions
 function isBan(words, text) {
   const chk = text.toLowerCase()
   for (const word of words) {
@@ -47,6 +49,27 @@ function isBan(words, text) {
   }
   return false
 }
+
+Array.prototype.replaceAll = function(find, replace) {
+  var rArr = this;
+  for(const value of rArr) {
+  if (typeof value !== "string" && typeof value !== "object") return;
+  if (value == null || value == undefined) return;
+  rArr[rArr.indexOf(value)] = value.replaceAll(find, replace)
+  }
+  return rArr;
+}
+
+Object.prototype.replaceAll = function(find, replace) {
+  var rObj = this;
+  for(const [key, value] of Object.entries(rObj)) {
+    if(typeof value !== "string" && typeof value !== "object" && typeof value !== "array") return;
+    if(value == null || value == undefined) return;
+    rObj[key] = value.replaceAll(find, replace);
+  }
+  return rObj;
+}
+
 //Invite block
 client.on("messageCreate", message => { 
   if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, message.content)) {
@@ -60,35 +83,19 @@ client.on("messageCreate", message => {
                .replaceAll(`{content}`, `${message.content}`)
   }
     message.channel.send(placeholderReplace(messages.deleteAlert)).then(m => setTimeout(function () { m.delete() }, 15000))
-    message.delete()
     if (config.logging.isEnabled) {
       if (config.logging.isEmbed) {
-        
-        var logEmbedOptions = {
-          title: placeholderReplace(messages.logging.embed.title),
-          description: placeholderReplace(messages.logging.embed.description),
-          color: messages.logging.embed.color,
-          footer: {
-            text: placeholderReplace(messages.logging.embed.footer.text)
-          }
-        }
-        if (messages.logging.embed.timestamp = true) {
-          logEmbedOptions.timestamp = ``
-        }
-        if (messages.logging.embed.footer.imageEnabled) {
-          logEmbedOptions.footer.iconURL = placeholderReplace(messages.logging.embed.footer.image)
-        }
-        var logEmbed = new MessageEmbed(logEmbedOptions)
-        logChannel.send({ embeds: [ logEmbed ] })
+         var embed = placeholderReplace(messages.embeds.messageSendEmbed)
       } else {
         logChannel.send(placeholderReplace(messages.logging.noEmbed))
       }
     }
+	message.delete()
   }
 })
 
 client.on("messageUpdate", (oldMessage, newMessage) => {
-  if (!message.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, newMessage.content)) {
+  if (!newMessage.member.roles.cache.hasAny(...config.immuneRoles) && isBan(config.banwords, newMessage.content)) {
     function placeholderReplace(text) {
     return text.replaceAll(`{user}`, `<@${newMessage.author.id}>`)
                .replaceAll(`{channel}`, `<#${newMessage.channel.id}>`)
@@ -100,28 +107,13 @@ client.on("messageUpdate", (oldMessage, newMessage) => {
   }
     if (config.logging.isEnabled) {
       if (config.logging.isEmbed) {
-        
-        var logEmbedOptions = {
-          title: placeholderReplace(messages.logging.embed.title),
-          description: placeholderReplace(messages.logging.embed.description),
-          color: messages.logging.embed.color,
-          footer: {
-            text: placeholderReplace(messages.logging.embed.footer.text)
-          }
-        }
-        if (messages.logging.embed.timestamp = true) {
-          logEmbedOptions.timestamp = ``
-        }
-        if (messages.logging.embed.footer.imageEnabled) {
-          logEmbedOptions.footer.iconURL = placeholderReplace(messages.logging.embed.footer.image)
-        }
-        var logEmbed = new MessageEmbed(logEmbedOptions)
-        logChannel.send({ embeds: [ logEmbed ] })
+	  var embed = placeholderReplace(messages.embeds.messageEditEmbed)
+	  logChannel.send({embeds: [embed]})
       } else {
         logChannel.send(placeholderReplace(messages.logging.noEmbed))
       }
     }
+	newMessage.delete()
   }
-    newMessage.delete()
   }
 })
